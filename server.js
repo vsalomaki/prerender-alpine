@@ -20,7 +20,10 @@ if(process.env.MAP_DOMAIN_TO_LOCALHOST) {
 
       if(isFQDN(domain)) {
         const addStr = '--host-resolver-rules=MAP *.' + domain + ' ' + target;
+        console.log('Mapping *.' + domain + ' to ' + target);
         chromeFlags.push(addStr)
+      } else {
+        console.log(domain + ' is not an FQDN');
       }
     }
 
