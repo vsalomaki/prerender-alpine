@@ -11,6 +11,7 @@ const server = prerender({
 server.use(prerender.blacklist());
 server.use(prerender.httpHeaders());
 server.use(prerender.removeScriptTags());
+server.use(require('prerender-request-blacklist'));
 
 if (memCache === 1) {
     server.use(prMemoryCache);
