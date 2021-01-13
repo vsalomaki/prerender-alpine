@@ -3,8 +3,33 @@
 const prerender = require('prerender');
 const prMemoryCache = require('prerender-memory-cache');
 
+var chromeFlags = [
+    '--no-sandbox',
+    '--headless',
+    '--disable-gpu',
+    '--remote-debugging-port=9222',
+    '--hide-scrollbars',
+    '--disable-dev-shm-usage',
+    '--ignore-certificate-errors'
+];
+
+if (process.env.MAP_DOMAIN_TO_LOCALHOST) {
+    const isFQDN = require("is-fqdn");
+    const setting = process.env.MAP_DOMAIN_TO_LOCALHOST.trim().split(",");
+    if (setting.length > 0) {
+        const domain = setting[0];
+        const target = setting.length > 1 ? setting[1] : 'localhost';
+
+        if (isFQDN(domain)) {
+            const addStr = '--host-resolver-rules=MAP *.' + domain + ' ' + target;
+            chromeFlags.push(addStr)
+        }
+    }
+
+}
+
 const server = prerender({
-    chromeFlags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222', '--hide-scrollbars', '--disable-dev-shm-usage', '--ignore-certificate-errors'],
+    chromeFlags: chromeFlags,
     forwardHeaders: true,
     chromeLocation: '/usr/bin/chromium-browser'
 });
