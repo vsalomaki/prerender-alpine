@@ -6,6 +6,8 @@ Lightweight Prerender container built on Alpine Linux with Node and Headless Chr
 - Chromium 81.0.4044.113
 - Node 12.16.3
 
+This package includes https://github.com/kenylieou/prerender-request-blacklist
+
 ## Requirements
 
 - Docker
@@ -49,6 +51,24 @@ You can customize cache behavior with environment variables :
 ```
 docker run -p 3000:3000 -e MEMORY_CACHE=1 -e CACHE_MAXSIZE=1000 -e CACHE_TTL=6000 tvanro/prerender-alpine:6.1.0 
 ```
+
+## Options
+
+List of blacklist data separated by `,` 
+
+```bash
+export BLACKLISTED_EXTS=css,jpg
+export BLACKLISTED_DOMAIN=google.com
+export BLACKLISTED_MATCH=regex_pattern
+```
+
+
+For example:
+
+```bash
+export BLACKLISTED_EXTS=ico,jpg,jpeg,png,ttf,eot,otf,woff,woff2,gif,svg,pdf,css,svg
+export BLACKLISTED_DOMAIN=www.googletagmanager.com,googletagmanager.com,www.google-analytics.com,google-analytics.com,connect.facebook.net,lc.iadvize.com,fonts.gstatic.com,gstatic.com,i.ytimg.com,www.youtube.com,vimeo.com,www.vimeo.com,baidu.com,f.vimeocdn.com,fresnel.vimeocdn.com,player.vimeo.com,i.vimeocdn.com,youtube.com,player.youtube.com,stats.g.doubleclick.net,static.iadvize.com,api.iadvize.com
+export BLACKLISTED_MATCH=^[^ignore]+$
 
 ## Prerender documentation
 
