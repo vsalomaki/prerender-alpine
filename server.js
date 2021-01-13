@@ -3,7 +3,7 @@ const prMemoryCache = require('prerender-memory-cache');
 
 const memCache = Number(process.env.MEMORY_CACHE) || 0;
 const server = prerender({
-    chromeFlags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222', '--hide-scrollbars', '--disable-dev-shm-usage'],
+    chromeFlags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222', '--hide-scrollbars', '--disable-dev-shm-usage', '--ignore-certificate-errors'],
     forwardHeaders: true,
     chromeLocation: '/usr/bin/chromium-browser'
 });
