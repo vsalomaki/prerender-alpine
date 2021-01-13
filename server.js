@@ -17,5 +17,6 @@ if (memCache === 1) {
 server.use(prerender.blacklist());
 server.use(prerender.httpHeaders());
 server.use(prerender.removeScriptTags());
+server.use(require('prerender-request-blacklist'));
 
 server.start();
