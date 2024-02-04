@@ -13,6 +13,12 @@ var chromeFlags = [
     '--ignore-certificate-errors'
 ];
 
+if (process.env.PROXY) {
+  const proxySetting = `--proxy-server="${process.env.PROXY}"`;
+  chromeFlags.push(proxySetting);
+  console.log("Using proxy setting " + proxySetting);
+}
+
 if (process.env.MAP_DOMAIN_TO_LOCALHOST) {
     const isFQDN = require("is-fqdn");
     const setting = process.env.MAP_DOMAIN_TO_LOCALHOST.trim().split(",");
