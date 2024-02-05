@@ -11,10 +11,10 @@ ENV BLACKLISTED_MATCH=^[^ignore]+$
 RUN apk add --no-cache chromium tini
 
 USER node
-WORKDIR "/home/node"
+WORKDIR /home/node
 
-COPY ./package.json .
-COPY ./server.js .
+COPY --chown=node:node ./package* .
+COPY --chown=node:node ./server.js .
 
 # install npm packages and clear cache
 RUN npm install --no-package-lock \
