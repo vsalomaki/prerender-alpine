@@ -11,5 +11,8 @@
     "prerender": "5.20.0",
     "prerender-memory-cache": "1.0.2",
     "prerender-request-blacklist": "^1.0.2"
+  },
+  "overrides": {
+    "chrome-remote-interface": "~0.33.0"
   }
 }

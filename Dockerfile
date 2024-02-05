@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:20-alpine
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
 ENV CHROME_PATH=/usr/lib/chromium/
@@ -12,13 +12,13 @@ RUN apk add --update-cache chromium tini \
     && rm -rf /var/cache/apk/* /tmp/*
 
 USER node
-WORKDIR "/home/node"
+WORKDIR /home/node
 
-COPY ./package.json .
-COPY ./server.js .
+COPY --chown=node:node ./package* .
+COPY --chown=node:node ./server.js .
 
 # install npm packages
-RUN npm install --no-package-lock
+RUN npm install
 
 EXPOSE 3000
 
