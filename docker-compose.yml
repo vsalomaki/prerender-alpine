@@ -8,4 +8,5 @@ services:
       - MEMORY_CACHE=0
       - CACHE_MAXSIZE=1000
       - CACHE_TTL=6000
+      - ALLOWED_DOMAINS=example.com,www.example.com
     restart: unless-stopped
