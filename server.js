@@ -14,9 +14,9 @@ var chromeFlags = [
 ];
 
 if (process.env.PROXY) {
-  const proxySetting = `--proxy-server="${process.env.PROXY}"`;
-  chromeFlags.push(proxySetting);
-  console.log("Using proxy setting " + proxySetting);
+    const proxySetting = `--proxy-server="${process.env.PROXY}"`;
+    chromeFlags.push(proxySetting);
+    console.log("Using proxy setting " + proxySetting);
 }
 
 if (process.env.MAP_DOMAIN_TO_LOCALHOST) {
@@ -51,6 +51,9 @@ if (memCache === 1) {
 server.use(prerender.blacklist());
 server.use(prerender.httpHeaders());
 server.use(prerender.removeScriptTags());
-server.use(require('prerender-request-blacklist'));
+if (process.env.ALLOWED_DOMAINS) {
+    server.use(prerender.whitelist());
+}
+server.use(require("prerender-request-blacklist"));
 
 server.start();
